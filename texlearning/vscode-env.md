@@ -4,7 +4,7 @@
 
 ### 安装LaTeX Workshop插件
 
-![安装 Latex Workshop 插件](.images/vscode-env/image-20210605224533746.png)
+![安装 Latex Workshop 插件](./.images/vscode-env/image-20210605224533746.png)
 
 - 编辑`C:\Users\{用户名}\AppData\Roaming\Code\User\settings.json`文件
 
@@ -107,4 +107,4 @@
 
 单机选择左侧的TEX插件图标，并双击 Recipe: latexmk(xelatex)并等待，直到生成【与tex文件同名】.pdf
 
-![渲染操作指南](.images/vscode-env/image-20210605224800408.png)
+![渲染操作指南](./.images/vscode-env/image-20210605224800408.png)
