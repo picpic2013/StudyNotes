@@ -4,3 +4,4 @@
 
 ## [vs code docker 搭建](./codeserver/build-code-server.md)
 
+## [Opencv ubuntu搭建](./opencv-ubuntu/index.md)
