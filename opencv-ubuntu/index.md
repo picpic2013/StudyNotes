@@ -57,6 +57,20 @@ sudo apt-get install libgphoto2-dev libeigen3-dev libhdf5-dev doxygen
 
 ## 执行安装流程
 
+### Anaconda 创建Python环境
+
+~~~bash
+conda create -n opencv python=3.9
+conda activate opencv
+conda install numpy
+~~~
+
+### 环境变量
+
+~~~shell
+export CPLUS_INCLUDE_PATH=/home/pic/anaconda3/envs/opencv/lib/python3.9
+~~~
+
 ### cmake
 
 ~~~ shell
@@ -78,14 +92,20 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D OPENCV_GENERATE_PKGCONFIG=ON \
 -D OPENCV_PC_FILE_NAME=opencv.pc \
 -D OPENCV_ENABLE_NONFREE=ON \
+-D PYTHON3_LIBRARY=/home/pic/anaconda3/envs/opencv/lib/python3.9 \
+-D PYTHON3_INCLUDE_DIR=/home/pic/anaconda3/envs/opencv/include/python3.9 \
+-D PYTHON3_PACKAGES_PATH=/home/pic/anaconda3/envs/opencv/lib/python3.9/site-packages \
+-D BUILD_opencv_python2=OFF \
+-D BUILD_opencv_python3=ON \
 -D OPENCV_PYTHON3_INSTALL_PATH=/home/pic/anaconda3/envs/opencv/lib/python3.9/site-packages \
 -D PYTHON_EXECUTABLE=/home/pic/anaconda3/envs/opencv/bin/python \
--D OPENCV_EXTRA_MODULES_PATH=/home/pic/opencv/opencv_contrib/modules \
+-D OPENCV_EXTRA_MODULES_PATH=/home/pic/download/opencv_contrib/modules \
 -D INSTALL_PYTHON_EXAMPLES=ON \
 -D INSTALL_C_EXAMPLES=ON \
--D BUILD_EXAMPLES=OFF \
+-D BUILD_EXAMPLES=ON \
 -D CUDNN_INCLUDE_DIR=/usr/local/cuda/include \
 -D CUDNN_LIBRARY=/usr/local/cuda/lib64/libcudnn.so.8.2.2 \
+-D OPENCV_ENABLE_NONFREE=ON \
 ..
 ~~~
 
@@ -106,6 +126,15 @@ CUDNN_INCLUDE_DIR
 
 # libcudnn.so.8.2.2 的位置
 CUDNN_LIBRARY
+
+PYTHON3_LIBRARY
+PYTHON3_INCLUDE_DIR
+PYTHON3_PACKAGES_PATH
+BUILD_opencv_python2
+BUILD_opencv_python3
+
+# 非开源算法
+OPENCV_ENABLE_NONFREE
 ~~~
 
 检查输出，`CUDNN`等是否为`YES`
@@ -114,6 +143,7 @@ CUDNN_LIBRARY
 
 ~~~ shell
 nproc
+# j后面的数字为nproc的两倍，以最大化编译性能
 make -j8
 sudo make install
 sudo /bin/bash -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf'
